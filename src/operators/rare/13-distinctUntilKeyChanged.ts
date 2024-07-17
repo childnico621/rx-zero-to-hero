@@ -7,3 +7,20 @@ const observer: Observer<any> = {
     error: null,
     complete: () => console.info('complete!')
 };
+
+interface ICast { name: string; }
+
+const personajes: ICast[] = [
+    { name: 'Megaman' },
+    { name: 'X' },
+    { name: 'Zero' },
+    { name: 'Dr. Willy' },
+    { name: 'X' },
+    { name: 'Megaman' },
+    { name: 'Megaman' },
+    { name: 'Zero' }
+];
+
+from(personajes)
+    .pipe(distinctUntilKeyChanged('name'))
+    .subscribe(observer);
