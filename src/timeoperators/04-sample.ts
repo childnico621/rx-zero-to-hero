@@ -1,5 +1,5 @@
 import { asyncScheduler, from, fromEvent, interval, Observer, of, range } from "rxjs";
-import { auditTime, map, sample, sampleTime, tap } from "rxjs/operators";
+import { map, sample, sampleTime } from "rxjs/operators";
 
 
 const observer: Observer<any> = {
@@ -10,4 +10,11 @@ const observer: Observer<any> = {
 /**
  * emite el valor al momento que el evento pasado al parametro ocurre
  */
+const counter$ = interval(1000);
 
+const click$ = fromEvent<MouseEvent>(document, 'click')
+    .pipe(map(({ x, y }) => ({ x, y })));
+
+counter$.pipe(
+    sample(click$)
+).subscribe(observer);

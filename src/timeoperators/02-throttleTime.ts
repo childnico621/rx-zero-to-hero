@@ -1,5 +1,5 @@
-import { from, fromEvent, interval, Observer, of, range } from "rxjs";
-import { debounceTime, distinct, distinctUntilChanged, distinctUntilKeyChanged, map, skip, takeUntil, tap } from "rxjs/operators";
+import { asyncScheduler, from, fromEvent, interval, Observer, of, range } from "rxjs";
+import { throttleTime, distinct, distinctUntilChanged, distinctUntilKeyChanged, map, skip, takeUntil, tap } from "rxjs/operators";
 
 
 const observer: Observer<any> = {
@@ -10,8 +10,8 @@ const observer: Observer<any> = {
 
 const click$ = fromEvent(document, 'click');
 click$
-    .pipe(debounceTime(1000))
-    //.subscribe(observer);
+    .pipe(throttleTime(3000))
+    // .subscribe(observer);
 
 // ejemplo 2
 
@@ -21,6 +21,6 @@ document.querySelector('body').append(input);
 const input$ = fromEvent(input, 'keyup');
 input$
 .pipe(map(x=> (<any>x.target).value))
-.pipe(debounceTime(1500))
+.pipe(throttleTime(3000, asyncScheduler, {leading:true, trailing: true}))
 .pipe(distinctUntilChanged())
 .subscribe(observer);
