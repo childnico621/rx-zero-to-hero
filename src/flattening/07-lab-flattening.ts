@@ -1,8 +1,8 @@
 import { fromEvent, interval, of } from "rxjs";
 import { ajax } from "rxjs/ajax";
 import { catchError, exhaustMap, map, mergeMap, switchMap, take, tap } from "rxjs/operators";
-import { ILogin } from "./interfaces/ILogin";
-import { ITokenResponse } from "./interfaces/ITokenResponse";
+import { ILogin } from "../interfaces/ILogin";
+import { ITokenResponse } from "../interfaces/ITokenResponse";
 
 // Helper
 
