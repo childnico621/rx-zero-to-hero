@@ -48,8 +48,8 @@ import { zip, of } from 'rxjs';
 
     // Realizar el llamado al URL para obtener a Luke Skywalker
     getRequest(`${SW_API}/people/1`)
-        .pipe(switchMap((personaje: any) => 
-            zip(of(personaje), getRequest(personaje.species[0] || `${SW_API}/species/1`)))
+        .pipe(switchMap((personaje: any) => zip(of(personaje), getRequest(personaje.species[0] || `${SW_API}/species/1`)))
+
         )
         .pipe(map(([personaje, especie]) => ({ personaje, especie })))
 
@@ -57,5 +57,7 @@ import { zip, of } from 'rxjs';
         // NO TOCAR el subscribe ni modificarlo ==
         .subscribe(console.log)           // ==
     // =======================================
+
+
 
 })();
