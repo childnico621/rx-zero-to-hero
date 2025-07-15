@@ -13,10 +13,23 @@ module.exports = {
         ]
     },
     resolve: {
-        extensions: [ '.tsx', '.ts', '.js' ]
+        extensions: ['.tsx', '.ts', '.js']
     },
     output: {
         filename: 'bundle.js',
-        path: path.resolve(__dirname, 'dist')
+        path: path.resolve(__dirname, 'dist'),
+        publicPath: '/'
+    },
+    devServer: {
+        static: [{
+            directory: path.join(__dirname, 'public'), // ⬅️ carpeta que contiene index.html
+        },
+        {
+            directory: path.join(__dirname, 'assets'),
+            publicPath: '/assets',
+        },
+        ],
+        open: true,
+        historyApiFallback: true,
     }
 };
